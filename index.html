@@ -40,7 +40,7 @@
             position: relative;
         }
 
-        /* Floating Hearts Animation (Rain Effect) */
+        /* Floating Hearts and Sparkles Animation (Rain Effect) */
         .hearts {
             position: absolute;
             width: 100%;
@@ -52,7 +52,7 @@
             z-index: 2;
         }
 
-        .heart {
+        .heart, .sparkle-emoji {
             position: absolute;
             top: -50px;
             font-size: 30px;
@@ -61,41 +61,31 @@
             color: rgba(255, 107, 129, 0.8); /* Pink hearts */
         }
 
+        /* Sparkle Emojis Styling */
+        .sparkle-emoji {
+            color: #fffacd; /* Light yellow for sparkles */
+            animation: sparkleRain 8s infinite;
+        }
+
         /* Different animations for varied effect */
-        .heart:nth-child(1) {
-            left: 10%;
+        .heart:nth-child(odd) {
+            left: calc(10% + 10%);
             animation-duration: 7s;
             animation-delay: 0s;
         }
 
-        .heart:nth-child(2) {
-            left: 25%;
-            animation-duration: 8s;
+        .sparkle-emoji:nth-child(even) {
+            left: calc(15% + 10%);
+            animation-duration: 6.5s;
             animation-delay: 1s;
+            color: #fffacd; /* Light yellow */
         }
 
-        .heart:nth-child(3) {
-            left: 40%;
-            animation-duration: 6s;
-            animation-delay: 2s;
-        }
-
-        .heart:nth-child(4) {
-            left: 55%;
-            animation-duration: 7.5s;
-            animation-delay: 0.5s;
-        }
-
-        .heart:nth-child(5) {
-            left: 70%;
-            animation-duration: 8.5s;
-            animation-delay: 1.5s;
-        }
-
-        .heart:nth-child(6) {
-            left: 85%;
-            animation-duration: 7.2s;
-            animation-delay: 0.8s;
+        /* Adjusted for multiple hearts and sparkles */
+        .hearts .heart, .hearts .sparkle-emoji {
+            width: 30px;
+            height: 30px;
+            font-size: 25px;
         }
 
         @keyframes rainDown {
@@ -108,6 +98,21 @@
             }
             100% {
                 transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes sparkleRain {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(0.8);
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(50vh) rotate(720deg) scale(1.2);
+            }
+            100% {
+                transform: translateY(100vh) rotate(1440deg) scale(0.8);
                 opacity: 0;
             }
         }
@@ -189,12 +194,12 @@
         /* Container Styling */
         .container {
             background: rgba(255, 255, 255, 0.95);
-            padding: 60px 80px;
-            border-radius: 20px;
+            padding: 80px 100px; /* Increased padding */
+            border-radius: 25px; /* Slightly more rounded */
             text-align: center;
-            max-width: 900px;
+            max-width: 1000px; /* Increased max-width */
             width: 90%;
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
             position: relative;
             z-index: 4;
             animation: fadeIn 1.5s ease-in-out;
@@ -208,8 +213,8 @@
         h1 {
             font-family: var(--font-script);
             color: var(--primary-color);
-            font-size: 3.5em;
-            margin-bottom: 40px;
+            font-size: 4em; /* Increased font size */
+            margin-bottom: 50px; /* Increased margin */
             animation: bounceIn 1s;
         }
 
@@ -229,30 +234,30 @@
         .photos {
             display: flex;
             justify-content: center;
-            gap: 40px;
-            margin-bottom: 50px;
+            gap: 50px; /* Increased gap */
+            margin-bottom: 60px; /* Increased margin */
             flex-wrap: wrap;
         }
 
         .photos img {
-            width: 200px;
-            height: 200px;
+            width: 250px; /* Enlarged size */
+            height: 250px; /* Enlarged size */
             object-fit: cover;
-            border-radius: 50%;
+            border-radius: 15px; /* Changed from circular to slightly rounded */
             border: 6px solid var(--primary-color);
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .photos img:hover {
             transform: scale(1.1);
-            box-shadow: 0 12px 24px rgba(255, 107, 129, 0.6);
+            box-shadow: 0 16px 32px rgba(255, 107, 129, 0.6);
         }
 
         /* Message Styling */
         .message {
-            font-size: 1.8em;
+            font-size: 2em; /* Increased font size */
             color: #333;
-            margin-bottom: 50px;
+            margin-bottom: 60px; /* Increased margin */
             line-height: 1.6;
             animation: slideIn 1s;
         }
@@ -266,71 +271,88 @@
         .buttons {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 40px; /* Increased gap */
             position: relative;
         }
 
         /* "Yes" Button Styling */
         .btn-yes {
-            background-color: var(--primary-color);
+            background: linear-gradient(45deg, #ff6b81, #ff4757);
             color: var(--secondary-color);
             border: none;
-            padding: 25px 80px;
-            font-size: 2em;
-            border-radius: 35px;
+            padding: 20px 100px; /* Adjusted padding */
+            font-size: 2.2em;
+            border-radius: 40px;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
             font-family: var(--font-sans);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-yes::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(45deg);
+            transition: opacity 0.3s;
+            opacity: 0;
         }
 
         .btn-yes:hover {
-            background-color: #ff4757; /* Slightly darker pink on hover */
+            background: linear-gradient(45deg, #ff4757, #e63946); /* Darker gradient on hover */
             transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.3);
         }
 
         .btn-yes:active {
             transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
         /* "No" Button Styling */
         .btn-no {
-            background-color: var(--accent-color);
+            background: linear-gradient(45deg, #d6a4e7, #c084fc);
             color: var(--secondary-color);
             border: none;
-            padding: 25px 80px;
-            font-size: 2em;
-            border-radius: 35px;
+            padding: 20px 100px; /* Adjusted padding */
+            font-size: 2.2em;
+            border-radius: 40px;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s, top 0.3s, left 0.3s;
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
             font-family: var(--font-sans);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
             position: relative;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .btn-no::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(45deg);
+            transition: opacity 0.3s;
+            opacity: 0;
         }
 
         .btn-no:hover {
-            background-color: #c084fc; /* Slightly darker lavender on hover */
+            background: linear-gradient(45deg, #c084fc, #a372f0); /* Darker gradient on hover */
             transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.3);
         }
 
         .btn-no:active {
             transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Make "No" Button Wonky and Unpressable */
-        .btn-no {
-            /* Initially positioned */
-            position: relative;
-            transition: transform 0.5s ease, top 0.5s ease, left 0.5s ease;
-        }
-
-        .btn-no.move {
-            /* Randomly move to a new position */
-            transform: translate(calc(var(--rand-x, 0px)), calc(var(--rand-y, 0px)));
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
         /* Modal Styling */
@@ -355,11 +377,11 @@
         .modal-content {
             background-color: #fff;
             margin: 10% auto; 
-            padding: 40px;
+            padding: 50px;
             border: none;
             width: 80%; 
-            max-width: 600px;
-            border-radius: 20px;
+            max-width: 700px; /* Increased max-width */
+            border-radius: 25px; /* More rounded */
             text-align: center;
             position: relative;
             animation: slideDown 0.5s;
@@ -374,8 +396,8 @@
             color: #aaa;
             position: absolute;
             top: 20px;
-            right: 25px;
-            font-size: 35px;
+            right: 30px;
+            font-size: 40px; /* Increased size */
             font-weight: bold;
             cursor: pointer;
             transition: color 0.3s;
@@ -388,12 +410,12 @@
 
         .modal-content h2 {
             color: var(--primary-color);
-            margin-bottom: 20px;
-            font-size: 2.5em;
+            margin-bottom: 25px;
+            font-size: 3em; /* Increased font size */
         }
 
         .modal-content p {
-            font-size: 1.3em;
+            font-size: 1.5em; /* Increased font size */
             color: #555;
             line-height: 1.6;
         }
@@ -412,20 +434,23 @@
 
         .confetti-piece {
             position: absolute;
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             background-color: var(--primary-color); /* Changed to primary color (pink) */
             opacity: 0.8;
-            animation: confettiFall 3s linear forwards;
+            animation: confettiFirework 1.5s ease-out forwards;
         }
 
-        @keyframes confettiFall {
+        @keyframes confettiFirework {
             0% {
-                transform: translateY(0) rotate(0deg);
+                transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+            50% {
                 opacity: 1;
             }
             100% {
-                transform: translateY(100vh) rotate(360deg);
+                transform: translateY(-100vh) translateX(200px) rotate(720deg) scale(0.5);
                 opacity: 0;
             }
         }
@@ -433,18 +458,19 @@
         /* Witty Messages Tooltip for "No" Button */
         .tooltip {
             position: absolute;
-            top: -50px;
+            top: -60px;
             left: 50%;
             transform: translateX(-50%);
             background-color: var(--tooltip-bg);
             color: var(--tooltip-text);
-            padding: 10px 15px;
+            padding: 12px 18px;
             border-radius: 10px;
             font-size: 1em;
             opacity: 0;
             transition: opacity 0.3s;
             pointer-events: none;
             white-space: nowrap;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
         .btn-no:hover .tooltip {
@@ -454,21 +480,35 @@
     </style>
 </head>
 <body>
-    <!-- Floating Hearts (Rain Effect) -->
+    <!-- Floating Hearts and Sparkles (Rain Effect) -->
     <div class="hearts">
+        <!-- Hearts -->
         <div class="heart">❤️</div>
         <div class="heart">❤️</div>
         <div class="heart">❤️</div>
         <div class="heart">❤️</div>
         <div class="heart">❤️</div>
         <div class="heart">❤️</div>
-        <!-- Add more hearts for a denser rain -->
         <div class="heart">❤️</div>
         <div class="heart">❤️</div>
         <div class="heart">❤️</div>
         <div class="heart">❤️</div>
         <div class="heart">❤️</div>
         <div class="heart">❤️</div>
+
+        <!-- Sparkles -->
+        <div class="sparkle-emoji">✨</div>
+        <div class="sparkle-emoji">✨</div>
+        <div class="sparkle-emoji">✨</div>
+        <div class="sparkle-emoji">✨</div>
+        <div class="sparkle-emoji">✨</div>
+        <div class="sparkle-emoji">✨</div>
+        <div class="sparkle-emoji">✨</div>
+        <div class="sparkle-emoji">✨</div>
+        <div class="sparkle-emoji">✨</div>
+        <div class="sparkle-emoji">✨</div>
+        <div class="sparkle-emoji">✨</div>
+        <div class="sparkle-emoji">✨</div>
     </div>
 
     <!-- Sparkles Container -->
@@ -496,8 +536,8 @@
         
         <div class="photos">
             <!-- Replace the src attribute with your own photo URLs -->
-            <img src="https://via.placeholder.com/200" alt="Us Photo 1">
-            <img src="https://via.placeholder.com/200" alt="Us Photo 2">
+            <img src="https://via.placeholder.com/250" alt="Us Photo 1">
+            <img src="https://via.placeholder.com/250" alt="Us Photo 2">
             <!-- Add more photos as desired -->
         </div>
         
@@ -555,10 +595,15 @@
 
         // Function to Launch Confetti
         function launchConfetti() {
-            const confettiCount = 200; // Increased count for more impact
+            const confettiCount = 100; // Adjusted count for a fireworks-like effect
             for (let i = 0; i < confettiCount; i++) {
                 createConfettiPiece();
             }
+
+            // Remove all confetti after 2 seconds
+            setTimeout(() => {
+                confettiContainer.innerHTML = '';
+            }, 2000);
         }
 
         // Function to Create a Single Confetti Piece
@@ -567,26 +612,29 @@
             confetti.classList.add('confetti-piece');
             // Random position across the width
             confetti.style.left = Math.random() * 100 + 'vw';
-            // Random background color (pink and lavender)
-            confetti.style.backgroundColor = getRandomColor();
-            // Random animation duration between 2s to 4s
-            confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
-            // Random size between 5px to 15px
-            const size = Math.random() * 10 + 5;
+            // Random animation delay
+            confetti.style.animationDelay = Math.random() * 0.5 + 's';
+            // Random animation duration between 1s to 1.5s for fireworks effect
+            confetti.style.animationDuration = (Math.random() * 0.5 + 1) + 's';
+            // Random size between 5px to 10px
+            const size = Math.random() * 5 + 5;
             confetti.style.width = size + 'px';
             confetti.style.height = size + 'px';
+            // Random horizontal movement
+            const translateX = Math.random() * 200 - 100; // -100px to +100px
+            confetti.style.transform = `translateY(0px) translateX(0px)`;
+            confetti.style.transition = 'transform 1.5s ease-out';
             confettiContainer.appendChild(confetti);
 
+            // Trigger the animation
+            requestAnimationFrame(() => {
+                confetti.style.transform = `translateY(-100vh) translateX(${translateX}px) rotate(${Math.random() * 720}deg) scale(${Math.random() * 0.5 + 0.5})`;
+            });
+
             // Remove the confetti piece after animation ends
-            confetti.addEventListener('animationend', () => {
+            confetti.addEventListener('transitionend', () => {
                 confetti.remove();
             });
-        }
-
-        // Function to Get a Random Color
-        function getRandomColor() {
-            const colors = ['#ff6b81', '#d6a4e7']; // Pink and Lavender
-            return colors[Math.floor(Math.random() * colors.length)];
         }
 
         // "No" Button Playfulness
@@ -595,7 +643,7 @@
             displayWittyMessage(noButton);
         });
 
-        // Function to Move the "No" Button to a Random Position with Eratic Movement
+        // Function to Move the "No" Button to a Random Position with Erratic Movement
         function moveButton(button) {
             const container = document.querySelector('.buttons');
             const containerRect = container.getBoundingClientRect();
