@@ -20,10 +20,12 @@
             --primary-color: #ff6b81; /* Pink */
             --secondary-color: #ffffff; /* White */
             --accent-color: #d6a4e7; /* Lavender */
-            /* Updated background gradient to pink and lavender */
-            --background-gradient: linear-gradient(135deg, #f9c6d5 0%, #d6a4e7 100%);
+            /* Updated background gradient to a fancier, more sophisticated gradient */
+            --background-gradient: radial-gradient(circle at top left, #f9c6d5, #d6a4e7, #a18cd1, #fbc2eb);
             --font-sans: 'Roboto', sans-serif;
             --font-script: 'Great Vibes', cursive;
+            --tooltip-bg: #ff6b81;
+            --tooltip-text: #ffffff;
         }
 
         /* Body Styling */
@@ -47,6 +49,7 @@
             overflow: hidden;
             top: 0;
             left: 0;
+            z-index: 2;
         }
 
         .heart {
@@ -109,17 +112,91 @@
             }
         }
 
+        /* Sparkles Animation */
+        .sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+            z-index: 3;
+        }
+
+        .sparkle {
+            position: absolute;
+            top: -10px;
+            width: 5px;
+            height: 5px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: sparkleFall 4s infinite;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .sparkle:nth-child(1) {
+            left: 15%;
+            animation-duration: 5s;
+            animation-delay: 0s;
+        }
+
+        .sparkle:nth-child(2) {
+            left: 30%;
+            animation-duration: 6s;
+            animation-delay: 1s;
+        }
+
+        .sparkle:nth-child(3) {
+            left: 45%;
+            animation-duration: 4.5s;
+            animation-delay: 2s;
+        }
+
+        .sparkle:nth-child(4) {
+            left: 60%;
+            animation-duration: 5.5s;
+            animation-delay: 0.5s;
+        }
+
+        .sparkle:nth-child(5) {
+            left: 75%;
+            animation-duration: 6.5s;
+            animation-delay: 1.5s;
+        }
+
+        .sparkle:nth-child(6) {
+            left: 90%;
+            animation-duration: 5.2s;
+            animation-delay: 0.8s;
+        }
+
+        @keyframes sparkleFall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
         /* Container Styling */
         .container {
             background: rgba(255, 255, 255, 0.95);
-            padding: 50px 60px;
-            border-radius: 15px;
+            padding: 60px 80px;
+            border-radius: 20px;
             text-align: center;
-            max-width: 800px;
+            max-width: 900px;
             width: 90%;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
             position: relative;
-            z-index: 1;
+            z-index: 4;
             animation: fadeIn 1.5s ease-in-out;
         }
 
@@ -131,8 +208,8 @@
         h1 {
             font-family: var(--font-script);
             color: var(--primary-color);
-            font-size: 3em;
-            margin-bottom: 30px;
+            font-size: 3.5em;
+            margin-bottom: 40px;
             animation: bounceIn 1s;
         }
 
@@ -152,30 +229,30 @@
         .photos {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin-bottom: 35px;
+            gap: 40px;
+            margin-bottom: 50px;
             flex-wrap: wrap;
         }
 
         .photos img {
-            width: 150px;
-            height: 150px;
+            width: 200px;
+            height: 200px;
             object-fit: cover;
             border-radius: 50%;
-            border: 5px solid var(--primary-color);
+            border: 6px solid var(--primary-color);
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .photos img:hover {
             transform: scale(1.1);
-            box-shadow: 0 10px 20px rgba(255, 107, 129, 0.6);
+            box-shadow: 0 12px 24px rgba(255, 107, 129, 0.6);
         }
 
         /* Message Styling */
         .message {
-            font-size: 1.5em;
+            font-size: 1.8em;
             color: #333;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             line-height: 1.6;
             animation: slideIn 1s;
         }
@@ -189,7 +266,7 @@
         .buttons {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 30px;
             position: relative;
         }
 
@@ -198,24 +275,24 @@
             background-color: var(--primary-color);
             color: var(--secondary-color);
             border: none;
-            padding: 20px 60px;
-            font-size: 1.5em;
-            border-radius: 30px;
+            padding: 25px 80px;
+            font-size: 2em;
+            border-radius: 35px;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
             font-family: var(--font-sans);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         .btn-yes:hover {
             background-color: #ff4757; /* Slightly darker pink on hover */
             transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
         }
 
         .btn-yes:active {
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         /* "No" Button Styling */
@@ -223,37 +300,37 @@
             background-color: var(--accent-color);
             color: var(--secondary-color);
             border: none;
-            padding: 20px 60px;
-            font-size: 1.5em;
-            border-radius: 30px;
+            padding: 25px 80px;
+            font-size: 2em;
+            border-radius: 35px;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s, top 0.3s, left 0.3s;
             font-family: var(--font-sans);
             position: relative;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         .btn-no:hover {
             background-color: #c084fc; /* Slightly darker lavender on hover */
             transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
         }
 
         .btn-no:active {
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         /* Make "No" Button Wonky and Unpressable */
         .btn-no {
             /* Initially positioned */
             position: relative;
+            transition: transform 0.5s ease, top 0.5s ease, left 0.5s ease;
         }
 
-        .btn-no:hover {
-            /* Randomly move to a new position within the container */
-            top: -10px;
-            left: 10px;
+        .btn-no.move {
+            /* Randomly move to a new position */
+            transform: translate(calc(var(--rand-x, 0px)), calc(var(--rand-y, 0px)));
         }
 
         /* Modal Styling */
@@ -312,11 +389,11 @@
         .modal-content h2 {
             color: var(--primary-color);
             margin-bottom: 20px;
-            font-size: 2em;
+            font-size: 2.5em;
         }
 
         .modal-content p {
-            font-size: 1.2em;
+            font-size: 1.3em;
             color: #555;
             line-height: 1.6;
         }
@@ -356,17 +433,18 @@
         /* Witty Messages Tooltip for "No" Button */
         .tooltip {
             position: absolute;
-            top: -40px;
+            top: -50px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
-            padding: 8px 12px;
+            background-color: var(--tooltip-bg);
+            color: var(--tooltip-text);
+            padding: 10px 15px;
             border-radius: 10px;
-            font-size: 0.9em;
+            font-size: 1em;
             opacity: 0;
             transition: opacity 0.3s;
             pointer-events: none;
+            white-space: nowrap;
         }
 
         .btn-no:hover .tooltip {
@@ -389,6 +467,25 @@
         <div class="heart">❤️</div>
         <div class="heart">❤️</div>
         <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+    </div>
+
+    <!-- Sparkles Container -->
+    <div class="sparkles">
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <!-- Add more sparkles for a denser effect -->
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
     </div>
 
     <!-- Confetti Container -->
@@ -399,8 +496,8 @@
         
         <div class="photos">
             <!-- Replace the src attribute with your own photo URLs -->
-            <img src="https://via.placeholder.com/150" alt="Us Photo 1">
-            <img src="https://via.placeholder.com/150" alt="Us Photo 2">
+            <img src="https://via.placeholder.com/200" alt="Us Photo 1">
+            <img src="https://via.placeholder.com/200" alt="Us Photo 2">
             <!-- Add more photos as desired -->
         </div>
         
@@ -414,7 +511,7 @@
             <button id="yesButton" class="btn-yes">Yes!</button>
             <button id="noButton" class="btn-no">
                 No
-                <span class="tooltip">I don't want that 😢</span>
+                <span class="tooltip">Are you kidding me? 😜</span>
             </button>
         </div>
     </div>
@@ -458,7 +555,7 @@
 
         // Function to Launch Confetti
         function launchConfetti() {
-            const confettiCount = 150; // Increased count for more impact
+            const confettiCount = 200; // Increased count for more impact
             for (let i = 0; i < confettiCount; i++) {
                 createConfettiPiece();
             }
@@ -474,9 +571,10 @@
             confetti.style.backgroundColor = getRandomColor();
             // Random animation duration between 2s to 4s
             confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
-            // Random size
-            confetti.style.width = Math.random() * 10 + 5 + 'px';
-            confetti.style.height = confetti.style.width;
+            // Random size between 5px to 15px
+            const size = Math.random() * 10 + 5;
+            confetti.style.width = size + 'px';
+            confetti.style.height = size + 'px';
             confettiContainer.appendChild(confetti);
 
             // Remove the confetti piece after animation ends
@@ -497,30 +595,38 @@
             displayWittyMessage(noButton);
         });
 
-        // Function to Move the "No" Button to a Random Position
+        // Function to Move the "No" Button to a Random Position with Eratic Movement
         function moveButton(button) {
             const container = document.querySelector('.buttons');
             const containerRect = container.getBoundingClientRect();
             const buttonRect = button.getBoundingClientRect();
 
+            // Calculate maximum allowed positions to keep the button within the container
             const maxX = containerRect.width - buttonRect.width;
             const maxY = containerRect.height - buttonRect.height;
 
-            const randomX = Math.random() * maxX;
-            const randomY = Math.random() * maxY;
+            // Generate random positions
+            const randX = Math.random() * maxX - maxX / 2; // Allow movement beyond container bounds for erratic effect
+            const randY = Math.random() * maxY - maxY / 2;
 
-            button.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            // Apply the random transform
+            button.style.transform = `translate(${randX}px, ${randY}px)`;
         }
 
         // Function to Display Witty Messages
         function displayWittyMessage(button) {
             const tooltip = button.querySelector('.tooltip');
             const messages = [
-                "I don't want that 😢",
-                "Don't do this!",
-                "Try saying yes instead 😉",
-                "You know you want to!",
-                "No way! 💔"
+                "Are you kidding me? 😜",
+                "Don't be shy! 😏",
+                "I knew you'd say yes! 😉",
+                "Nice try! 😄",
+                "You can't escape! 😆",
+                "Still thinking? 😅",
+                "Come on, say yes! 😇",
+                "No way! 😂",
+                "How about a yes? 😘",
+                "Trying to say no? 😝"
             ];
             const randomMessage = messages[Math.floor(Math.random() * messages.length)];
             tooltip.textContent = randomMessage;
@@ -529,7 +635,7 @@
         // Prevent clicking on "No" button
         noButton.addEventListener('click', (e) => {
             e.preventDefault();
-            // Optionally, you can display a message or do nothing
+            // Optionally, display a message or do nothing
         });
     </script>
 </body>
