@@ -167,6 +167,7 @@
             justify-content: center;
             gap: 40px; /* Increased gap between buttons */
             position: relative;
+            height: 100px; /* Added height to accommodate fixed positioning */
         }
 
         /* ====================================================
@@ -186,6 +187,7 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
             position: relative;
             overflow: hidden; /* Clips the pseudo-element */
+            z-index: 5; /* Ensures the button stays above other elements */
         }
 
         /* ====================================================
@@ -234,11 +236,15 @@
             font-size: 2.2em; /* Larger font size */
             border-radius: 40px; /* More rounded corners */
             cursor: pointer;
-            transition: background 0.3s, transform 0.3s, box-shadow 0.3s; /* Smooth transitions */
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s, transform 0.5s ease; /* Smooth transitions */
             font-family: var(--font-sans);
-            position: relative;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+            position: fixed; /* Changed to fixed for full viewport movement */
+            z-index: 6; /* Ensures the button stays above all other elements */
             overflow: hidden; /* Clips the pseudo-element */
+            left: 50%; /* Initial position */
+            top: 50%; /* Initial position */
+            transform: translate(-50%, -50%); /* Center the button */
         }
 
         /* ====================================================
@@ -266,26 +272,13 @@
         }
 
         .btn-no:hover {
-            transform: translateY(-7px); /* Slight upward movement */
+            transform: translate(-50%, -50%) scale(1.05); /* Slight enlargement on hover */
             box-shadow: 0 14px 28px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
         }
 
         .btn-no:active {
-            transform: translateY(-3px); /* Slight movement on click */
+            transform: translate(-50%, -50%) scale(0.95); /* Slight shrink on click */
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Shadow adjustment on click */
-        }
-
-        /* ====================================================
-           "No" Button Wonky Movement Styling
-           Enables smooth and erratic movement on hover
-        ==================================================== */
-        .btn-no {
-            transition: transform 0.5s ease, top 0.5s ease, left 0.5s ease; /* Smooth transitions */
-        }
-
-        .btn-no.move {
-            /* Randomly move to a new position */
-            transform: translate(calc(var(--rand-x, 0px)), calc(var(--rand-y, 0px)));
         }
 
         /* ====================================================
@@ -393,25 +386,23 @@
             position: absolute;
             width: 8px;
             height: 8px;
-            background-color: var(--primary-color); /* Pink confetti */
+            background-color: var(--primary-color); /* Default color */
             opacity: 0.8;
             animation: confettiFirework 2s ease-out forwards; /* Firework-like animation */
+            will-change: transform, opacity; /* Optimizes rendering */
         }
 
         /* ====================================================
            Firework Animation for Confetti
-           Moves confetti upwards and fades out
+           Moves confetti upwards and fades out with horizontal drift
         ==================================================== */
         @keyframes confettiFirework {
             0% {
-                transform: translateY(0) rotate(0deg) scale(1);
-                opacity: 1;
-            }
-            50% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
                 opacity: 1;
             }
             100% {
-                transform: translateY(-300px) rotate(720deg) scale(0.5);
+                transform: translate(var(--move-x), -300px) rotate(720deg) scale(0.5);
                 opacity: 0;
             }
         }
@@ -435,6 +426,7 @@
             pointer-events: none; /* Prevents tooltip from capturing mouse events */
             white-space: nowrap; /* Prevents text from wrapping */
             z-index: 5; /* Ensures tooltip is above other elements */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Adds a subtle shadow */
         }
 
         /* ====================================================
@@ -561,8 +553,17 @@
          * @returns {string} - A hex color code.
          */
         function getRandomColor() {
-            const colors = ['#ff6b81', '#d6a4e7', '#fbc2eb', '#a18cd1'];
+            const colors = ['#ff6b81', '#d6a4e7', '#fbc2eb', '#a18cd1', '#f7ff00', '#00ffc8', '#ff00f3', '#00f5d4'];
             return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        /**
+         * Generates a random shape for confetti.
+         * @returns {string} - The border-radius value.
+         */
+        function getRandomShape() {
+            const shapes = ['0%', '50%', '25%'];
+            return shapes[Math.floor(Math.random() * shapes.length)];
         }
 
         // ====================================================
@@ -643,14 +644,14 @@
          * Launches confetti pieces to simulate fireworks.
          */
         function launchConfetti() {
-            const confettiCount = 100; // Number of confetti pieces
+            const confettiCount = 150; // Number of confetti pieces (adjust for performance)
             for (let i = 0; i < confettiCount; i++) {
                 createConfettiPiece();
             }
-            // Clear confetti after 3 seconds to prevent clutter
+            // Clear confetti after 4 seconds to prevent clutter
             setTimeout(() => {
                 confettiContainer.innerHTML = '';
-            }, 3000);
+            }, 4000);
         }
 
         // ====================================================
@@ -663,24 +664,23 @@
         function createConfettiPiece() {
             const confetti = document.createElement('div');
             confetti.classList.add('confetti-piece');
+            
             // Random horizontal position
             confetti.style.left = `${randomRange(0, 100)}vw`;
             // Assign a random color from the palette
             confetti.style.backgroundColor = getRandomColor();
-            // Random animation duration for varied movement
-            confetti.style.animationDuration = `${randomRange(1, 2)}s`;
-            // Random size between 5px to 15px for variety
+            // Assign a random size between 5px to 15px
             const size = randomRange(5, 15);
             confetti.style.width = `${size}px`;
             confetti.style.height = `${size}px`;
-            // Random initial rotation angle
-            const angle = randomRange(0, 360);
-            // Apply initial transformation for spread effect
-            confetti.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
-
+            // Assign a random shape
+            confetti.style.borderRadius = getRandomShape();
+            // Assign a random horizontal movement (left or right)
+            const moveX = randomRange(-100, 100); // Pixels to move horizontally
+            confetti.style.setProperty('--move-x', `${moveX}px`);
             // Append confetti to the container
             confettiContainer.appendChild(confetti);
-
+            
             // Remove confetti piece after animation completes to maintain performance
             confetti.addEventListener('animationend', () => {
                 confetti.remove();
@@ -715,37 +715,60 @@
             "Let's make it official! 📝"
         ];
 
+        // Flag to prevent multiple rapid movements
+        let isMoving = false;
+
         // Event listener for mouseover on the "No" button
         noButton.addEventListener('mouseover', () => {
-            moveButton(noButton); // Move the button to a new position
-            displayWittyMessage(noButton); // Display a witty message
+            if (!isMoving && !noButton.disabled) {
+                isMoving = true;
+                moveButton(noButton); // Move the button to a new position
+                displayWittyMessage(noButton); // Display a witty message
+                // Allow movement again after transition completes
+                setTimeout(() => {
+                    isMoving = false;
+                }, 600); // Slightly more than transition duration
+            }
         });
 
         // Event listener for focus on the "No" button (for keyboard navigation)
         noButton.addEventListener('focus', () => {
-            moveButton(noButton); // Move the button to a new position
-            displayWittyMessage(noButton); // Display a witty message
+            if (!isMoving && !noButton.disabled) {
+                isMoving = true;
+                moveButton(noButton); // Move the button to a new position
+                displayWittyMessage(noButton); // Display a witty message
+                // Allow movement again after transition completes
+                setTimeout(() => {
+                    isMoving = false;
+                }, 600); // Slightly more than transition duration
+            }
         });
 
         /**
-         * Moves the "No" button to a random position within the container.
+         * Moves the "No" button to a random position within the viewport.
+         * Uses CSS transforms for smooth and performant animations.
          * @param {HTMLElement} button - The "No" button element.
          */
         function moveButton(button) {
-            const container = document.querySelector('.buttons');
-            const containerRect = container.getBoundingClientRect();
-            const buttonRect = button.getBoundingClientRect();
+            const buttonWidth = button.offsetWidth;
+            const buttonHeight = button.offsetHeight;
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
 
-            // Calculate maximum allowed positions to keep the button within the container
-            const maxX = containerRect.width - buttonRect.width;
-            const maxY = containerRect.height - buttonRect.height;
+            // Calculate maximum allowed positions to keep the button within the viewport
+            const maxLeft = viewportWidth - buttonWidth - 20; // 20px padding from edges
+            const maxTop = viewportHeight - buttonHeight - 20; // 20px padding from edges
 
-            // Generate random positions with more variability for erratic movement
-            const randX = randomRange(-maxX / 2, maxX / 2); // Allows movement in both directions
-            const randY = randomRange(-maxY / 2, maxY / 2);
+            // Generate random positions
+            const randLeft = randomRange(10, maxLeft); // 10px minimum from left
+            const randTop = randomRange(10, maxTop); // 10px minimum from top
 
-            // Apply the random transform to move the button
-            button.style.transform = `translate(${randX}px, ${randY}px)`;
+            // Calculate translation values relative to the center
+            const translateX = randLeft - (viewportWidth / 2);
+            const translateY = randTop - (viewportHeight / 2);
+
+            // Apply the random positions using transform for smoothness
+            button.style.transform = `translate(${translateX}px, ${translateY}px) scale(1)`; // Reset scale
         }
 
         /**
@@ -782,6 +805,24 @@
             if (event.key === 'Escape' && modal.style.display === 'block') {
                 modal.style.display = 'none'; // Hide the modal
             }
+        });
+
+        // ====================================================
+        // Initialize "No" Button Position on Page Load and Resize
+        // ====================================================
+
+        /**
+         * Positions the "No" button randomly when the page loads.
+         */
+        window.addEventListener('load', () => {
+            moveButton(noButton);
+        });
+
+        /**
+         * Repositions the "No" button when the window is resized to ensure it remains within the viewport.
+         */
+        window.addEventListener('resize', () => {
+            moveButton(noButton);
         });
     </script>
 </body>
