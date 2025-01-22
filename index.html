@@ -7,28 +7,40 @@
     <!-- Google Fonts for Stylish Typography -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS Reset */
+        /* ====================================================
+           CSS Reset
+           Ensures consistent styling across different browsers
+        ==================================================== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* CSS Variables for Easy Theming */
+        /* ====================================================
+           CSS Variables for Easy Theming
+           Defines color palette and fonts for reuse
+        ==================================================== */
         :root {
-            /* Updated primary and secondary colors to pink and lavender */
+            /* Primary and Secondary Colors */
             --primary-color: #ff6b81; /* Pink */
             --secondary-color: #ffffff; /* White */
             --accent-color: #d6a4e7; /* Lavender */
-            /* Updated background gradient to a fancier, more sophisticated gradient */
+            --tooltip-bg: #ff6b81; /* Tooltip background color */
+            --tooltip-text: #ffffff; /* Tooltip text color */
+
+            /* Fancier Background Gradient */
             --background-gradient: radial-gradient(circle at top left, #f9c6d5, #d6a4e7, #a18cd1, #fbc2eb);
+
+            /* Fonts */
             --font-sans: 'Roboto', sans-serif;
             --font-script: 'Great Vibes', cursive;
-            --tooltip-bg: #ff6b81;
-            --tooltip-text: #ffffff;
         }
 
-        /* Body Styling */
+        /* ====================================================
+           Body Styling
+           Sets the overall layout and background
+        ==================================================== */
         body {
             font-family: var(--font-sans);
             background: var(--background-gradient);
@@ -36,188 +48,50 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            overflow: hidden; /* Prevents scrollbars from appearing */
             position: relative;
         }
 
-        /* Floating Hearts and Sparkles Animation (Rain Effect) */
-        .hearts {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            top: 0;
-            left: 0;
-            z-index: 2;
-        }
-
-        .heart, .sparkle-emoji {
-            position: absolute;
-            top: -50px;
-            font-size: 30px;
-            animation: rainDown 8s infinite;
-            opacity: 0.8;
-            color: rgba(255, 107, 129, 0.8); /* Pink hearts */
-        }
-
-        /* Sparkle Emojis Styling */
-        .sparkle-emoji {
-            color: #fffacd; /* Light yellow for sparkles */
-            animation: sparkleRain 8s infinite;
-        }
-
-        /* Different animations for varied effect */
-        .heart:nth-child(odd) {
-            left: calc(10% + 10%);
-            animation-duration: 7s;
-            animation-delay: 0s;
-        }
-
-        .sparkle-emoji:nth-child(even) {
-            left: calc(15% + 10%);
-            animation-duration: 6.5s;
-            animation-delay: 1s;
-            color: #fffacd; /* Light yellow */
-        }
-
-        /* Adjusted for multiple hearts and sparkles */
-        .hearts .heart, .hearts .sparkle-emoji {
-            width: 30px;
-            height: 30px;
-            font-size: 25px;
-        }
-
-        @keyframes rainDown {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0.8;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        @keyframes sparkleRain {
-            0% {
-                transform: translateY(0) rotate(0deg) scale(0.8);
-                opacity: 0.5;
-            }
-            50% {
-                opacity: 1;
-                transform: translateY(50vh) rotate(720deg) scale(1.2);
-            }
-            100% {
-                transform: translateY(100vh) rotate(1440deg) scale(0.8);
-                opacity: 0;
-            }
-        }
-
-        /* Sparkles Animation */
-        .sparkles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            top: 0;
-            left: 0;
-            z-index: 3;
-        }
-
-        .sparkle {
-            position: absolute;
-            top: -10px;
-            width: 5px;
-            height: 5px;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.8;
-            animation: sparkleFall 4s infinite;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-        }
-
-        .sparkle:nth-child(1) {
-            left: 15%;
-            animation-duration: 5s;
-            animation-delay: 0s;
-        }
-
-        .sparkle:nth-child(2) {
-            left: 30%;
-            animation-duration: 6s;
-            animation-delay: 1s;
-        }
-
-        .sparkle:nth-child(3) {
-            left: 45%;
-            animation-duration: 4.5s;
-            animation-delay: 2s;
-        }
-
-        .sparkle:nth-child(4) {
-            left: 60%;
-            animation-duration: 5.5s;
-            animation-delay: 0.5s;
-        }
-
-        .sparkle:nth-child(5) {
-            left: 75%;
-            animation-duration: 6.5s;
-            animation-delay: 1.5s;
-        }
-
-        .sparkle:nth-child(6) {
-            left: 90%;
-            animation-duration: 5.2s;
-            animation-delay: 0.8s;
-        }
-
-        @keyframes sparkleFall {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0.8;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(720deg);
-                opacity: 0;
-            }
-        }
-
-        /* Container Styling */
+        /* ====================================================
+           Container Styling
+           Defines the main content box with padding and shadow
+        ==================================================== */
         .container {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 80px 100px; /* Increased padding */
-            border-radius: 25px; /* Slightly more rounded */
+            background: rgba(255, 255, 255, 0.95); /* Semi-transparent white background */
+            padding: 80px 100px; /* Increased padding for a larger box */
+            border-radius: 25px; /* More rounded corners */
             text-align: center;
-            max-width: 1000px; /* Increased max-width */
-            width: 90%;
-            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+            max-width: 1000px; /* Increased max width */
+            width: 90%; /* Responsive width */
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Enhanced shadow for depth */
             position: relative;
-            z-index: 4;
-            animation: fadeIn 1.5s ease-in-out;
+            z-index: 4; /* Ensures container is above background elements */
+            animation: fadeIn 1.5s ease-in-out; /* Fade-in animation on load */
         }
 
+        /* ====================================================
+           Fade-In Animation for Container
+        ==================================================== */
         @keyframes fadeIn {
             from { opacity: 0; transform: scale(0.95); }
             to { opacity: 1; transform: scale(1); }
         }
 
+        /* ====================================================
+           Heading Styling
+           Styles the main question text with animation
+        ==================================================== */
         h1 {
             font-family: var(--font-script);
             color: var(--primary-color);
-            font-size: 4em; /* Increased font size */
-            margin-bottom: 50px; /* Increased margin */
-            animation: bounceIn 1s;
+            font-size: 4em; /* Larger heading text */
+            margin-bottom: 50px; /* Increased spacing below the heading */
+            animation: bounceIn 1s; /* Bounce-in animation */
         }
 
+        /* ====================================================
+           Bounce-In Animation for Heading
+        ==================================================== */
         @keyframes bounceIn {
             0%, 20%, 50%, 80%, 100% { 
                 transform: translateY(0); 
@@ -230,67 +104,94 @@
             }
         }
 
-        /* Photos Section */
+        /* ====================================================
+           Photos Section Styling
+           Defines layout for the photos with hover effects
+        ==================================================== */
         .photos {
             display: flex;
             justify-content: center;
-            gap: 50px; /* Increased gap */
-            margin-bottom: 60px; /* Increased margin */
-            flex-wrap: wrap;
+            gap: 50px; /* Increased gap between images */
+            margin-bottom: 60px; /* Increased spacing below photos */
+            flex-wrap: wrap; /* Allows wrapping on smaller screens */
         }
 
+        /* ====================================================
+           Individual Photo Styling
+           Styles each photo with size, border, and hover effects
+        ==================================================== */
         .photos img {
-            width: 250px; /* Enlarged size */
-            height: 250px; /* Enlarged size */
-            object-fit: cover;
-            border-radius: 15px; /* Changed from circular to slightly rounded */
-            border: 6px solid var(--primary-color);
-            transition: transform 0.3s, box-shadow 0.3s;
+            width: 250px; /* Enlarged width */
+            height: 250px; /* Squared height */
+            object-fit: cover; /* Ensures image covers the box without distortion */
+            border-radius: 15px; /* Slightly rounded corners for modern look */
+            border: 6px solid var(--primary-color); /* Thicker border for definition */
+            transition: transform 0.3s, box-shadow 0.3s; /* Smooth transitions on hover */
         }
 
+        /* ====================================================
+           Hover Effect for Photos
+           Enlarges and adds shadow on hover
+        ==================================================== */
         .photos img:hover {
-            transform: scale(1.1);
-            box-shadow: 0 16px 32px rgba(255, 107, 129, 0.6);
+            transform: scale(1.1); /* Slight enlargement */
+            box-shadow: 0 15px 30px rgba(255, 107, 129, 0.6); /* Enhanced shadow */
         }
 
-        /* Message Styling */
+        /* ====================================================
+           Message Styling
+           Styles the heartfelt message with animation
+        ==================================================== */
         .message {
-            font-size: 2em; /* Increased font size */
-            color: #333;
-            margin-bottom: 60px; /* Increased margin */
-            line-height: 1.6;
-            animation: slideIn 1s;
+            font-size: 2em; /* Larger message text */
+            color: #333; /* Darker text color for readability */
+            margin-bottom: 60px; /* Increased spacing below the message */
+            line-height: 1.6; /* Improved line spacing */
+            animation: slideIn 1s; /* Slide-in animation */
         }
 
+        /* ====================================================
+           Slide-In Animation for Message
+        ==================================================== */
         @keyframes slideIn {
             from { opacity: 0; transform: translateX(-50px); }
             to { opacity: 1; transform: translateX(0); }
         }
 
-        /* Buttons Container */
+        /* ====================================================
+           Buttons Container Styling
+           Defines layout for Yes and No buttons
+        ==================================================== */
         .buttons {
             display: flex;
             justify-content: center;
-            gap: 40px; /* Increased gap */
+            gap: 40px; /* Increased gap between buttons */
             position: relative;
         }
 
-        /* "Yes" Button Styling */
+        /* ====================================================
+           "Yes" Button Styling
+           Adds gradients, shadows, and hover effects for a stylish look
+        ==================================================== */
         .btn-yes {
-            background: linear-gradient(45deg, #ff6b81, #ff4757);
+            background: linear-gradient(45deg, #ff6b81, #d6a4e7); /* Gradient background */
             color: var(--secondary-color);
             border: none;
-            padding: 20px 100px; /* Adjusted padding */
-            font-size: 2.2em;
-            border-radius: 40px;
+            padding: 30px 100px; /* Larger padding */
+            font-size: 2.2em; /* Larger font size */
+            border-radius: 40px; /* More rounded corners */
             cursor: pointer;
-            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s; /* Smooth transitions */
             font-family: var(--font-sans);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
             position: relative;
-            overflow: hidden;
+            overflow: hidden; /* Clips the pseudo-element */
         }
 
+        /* ====================================================
+           "Yes" Button Hover Overlay Effect
+           Creates a light overlay on hover for depth
+        ==================================================== */
         .btn-yes::after {
             content: '';
             position: absolute;
@@ -298,39 +199,52 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: rotate(45deg);
-            transition: opacity 0.3s;
-            opacity: 0;
+            background: rgba(255, 255, 255, 0.1); /* Semi-transparent overlay */
+            transform: rotate(45deg) scale(0); /* Initial state */
+            transition: transform 0.3s; /* Smooth transition */
+        }
+
+        /* ====================================================
+           "Yes" Button Hover Transform
+           Activates the overlay effect and adds movement
+        ==================================================== */
+        .btn-yes:hover::after {
+            transform: rotate(45deg) scale(1); /* Expands the overlay */
         }
 
         .btn-yes:hover {
-            background: linear-gradient(45deg, #ff4757, #e63946); /* Darker gradient on hover */
-            transform: translateY(-5px);
-            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.3);
+            transform: translateY(-7px); /* Slight upward movement */
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
         }
 
         .btn-yes:active {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px); /* Slight movement on click */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Shadow adjustment on click */
         }
 
-        /* "No" Button Styling */
+        /* ====================================================
+           "No" Button Styling
+           Adds gradients, shadows, and hover effects for a stylish look
+        ==================================================== */
         .btn-no {
-            background: linear-gradient(45deg, #d6a4e7, #c084fc);
+            background: linear-gradient(45deg, #d6a4e7, #ff6b81); /* Gradient background */
             color: var(--secondary-color);
             border: none;
-            padding: 20px 100px; /* Adjusted padding */
-            font-size: 2.2em;
-            border-radius: 40px;
+            padding: 30px 100px; /* Larger padding */
+            font-size: 2.2em; /* Larger font size */
+            border-radius: 40px; /* More rounded corners */
             cursor: pointer;
-            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s; /* Smooth transitions */
             font-family: var(--font-sans);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
             position: relative;
-            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+            overflow: hidden; /* Clips the pseudo-element */
         }
 
+        /* ====================================================
+           "No" Button Hover Overlay Effect
+           Creates a light overlay on hover for depth
+        ==================================================== */
         .btn-no::after {
             content: '';
             position: absolute;
@@ -338,202 +252,250 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: rotate(45deg);
-            transition: opacity 0.3s;
-            opacity: 0;
+            background: rgba(255, 255, 255, 0.1); /* Semi-transparent overlay */
+            transform: rotate(45deg) scale(0); /* Initial state */
+            transition: transform 0.3s; /* Smooth transition */
+        }
+
+        /* ====================================================
+           "No" Button Hover Transform
+           Activates the overlay effect and adds movement
+        ==================================================== */
+        .btn-no:hover::after {
+            transform: rotate(45deg) scale(1); /* Expands the overlay */
         }
 
         .btn-no:hover {
-            background: linear-gradient(45deg, #c084fc, #a372f0); /* Darker gradient on hover */
-            transform: translateY(-5px);
-            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.3);
+            transform: translateY(-7px); /* Slight upward movement */
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
         }
 
         .btn-no:active {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px); /* Slight movement on click */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Shadow adjustment on click */
         }
 
-        /* Modal Styling */
+        /* ====================================================
+           "No" Button Wonky Movement Styling
+           Enables smooth and erratic movement on hover
+        ==================================================== */
+        .btn-no {
+            transition: transform 0.5s ease, top 0.5s ease, left 0.5s ease; /* Smooth transitions */
+        }
+
+        .btn-no.move {
+            /* Randomly move to a new position */
+            transform: translate(calc(var(--rand-x, 0px)), calc(var(--rand-y, 0px)));
+        }
+
+        /* ====================================================
+           Modal Styling
+           Styles the modal that appears upon clicking "Yes"
+        ==================================================== */
         .modal {
             display: none; /* Hidden by default */
             position: fixed; 
-            z-index: 10; 
+            z-index: 10; /* Ensures modal is above all other elements */
             left: 0;
             top: 0;
             width: 100%; 
             height: 100%; 
             overflow: hidden; 
-            background-color: rgba(0,0,0,0.6); 
-            animation: fadeInModal 0.5s;
+            background-color: rgba(0,0,0,0.6); /* Semi-transparent black background */
+            animation: fadeInModal 0.5s; /* Fade-in animation */
         }
 
+        /* ====================================================
+           Fade-In Animation for Modal
+        ==================================================== */
         @keyframes fadeInModal {
             from { opacity: 0; }
             to { opacity: 1; }
         }
 
+        /* ====================================================
+           Modal Content Styling
+           Defines the content box within the modal
+        ==================================================== */
         .modal-content {
             background-color: #fff;
-            margin: 10% auto; 
+            margin: 5% auto; /* Centers the modal content */
             padding: 50px;
             border: none;
             width: 80%; 
-            max-width: 700px; /* Increased max-width */
-            border-radius: 25px; /* More rounded */
+            max-width: 700px;
+            border-radius: 25px;
             text-align: center;
             position: relative;
-            animation: slideDown 0.5s;
+            animation: slideDown 0.5s; /* Slide-down animation */
         }
 
+        /* ====================================================
+           Slide-Down Animation for Modal Content
+        ==================================================== */
         @keyframes slideDown {
             from { transform: translateY(-50px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
 
+        /* ====================================================
+           Close Button Styling
+           Styles the 'X' button to close the modal
+        ==================================================== */
         .close-button {
             color: #aaa;
             position: absolute;
-            top: 20px;
+            top: 25px;
             right: 30px;
-            font-size: 40px; /* Increased size */
+            font-size: 40px;
             font-weight: bold;
             cursor: pointer;
-            transition: color 0.3s;
+            transition: color 0.3s; /* Smooth color transition on hover */
         }
 
         .close-button:hover,
         .close-button:focus {
-            color: var(--primary-color);
+            color: var(--primary-color); /* Changes color on hover/focus */
         }
 
+        /* ====================================================
+           Modal Heading and Paragraph Styling
+           Styles the content inside the modal
+        ==================================================== */
         .modal-content h2 {
             color: var(--primary-color);
             margin-bottom: 25px;
-            font-size: 3em; /* Increased font size */
+            font-size: 3em; /* Larger heading in modal */
         }
 
         .modal-content p {
-            font-size: 1.5em; /* Increased font size */
-            color: #555;
-            line-height: 1.6;
+            font-size: 1.4em; /* Larger paragraph text */
+            color: #555; /* Slightly darker text for readability */
+            line-height: 1.8; /* Improved line spacing */
         }
 
-        /* Confetti Animation */
+        /* ====================================================
+           Confetti Animation Styling
+           Styles each confetti piece for the fireworks effect
+        ==================================================== */
         .confetti {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
+            pointer-events: none; /* Allows clicks through confetti */
             overflow: hidden;
-            z-index: 5;
+            z-index: 5; /* Ensures confetti is above other background elements */
         }
 
         .confetti-piece {
             position: absolute;
             width: 8px;
             height: 8px;
-            background-color: var(--primary-color); /* Changed to primary color (pink) */
+            background-color: var(--primary-color); /* Pink confetti */
             opacity: 0.8;
-            animation: confettiFirework 1.5s ease-out forwards;
+            animation: confettiFirework 2s ease-out forwards; /* Firework-like animation */
         }
 
+        /* ====================================================
+           Firework Animation for Confetti
+           Moves confetti upwards and fades out
+        ==================================================== */
         @keyframes confettiFirework {
             0% {
-                transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+                transform: translateY(0) rotate(0deg) scale(1);
                 opacity: 1;
             }
             50% {
                 opacity: 1;
             }
             100% {
-                transform: translateY(-100vh) translateX(200px) rotate(720deg) scale(0.5);
+                transform: translateY(-300px) rotate(720deg) scale(0.5);
                 opacity: 0;
             }
         }
 
-        /* Witty Messages Tooltip for "No" Button */
+        /* ====================================================
+           Tooltip Styling for "No" Button
+           Styles the witty message tooltip
+        ==================================================== */
         .tooltip {
             position: absolute;
-            top: -60px;
+            top: -60px; /* Positions tooltip above the button */
             left: 50%;
             transform: translateX(-50%);
-            background-color: var(--tooltip-bg);
-            color: var(--tooltip-text);
-            padding: 12px 18px;
-            border-radius: 10px;
-            font-size: 1em;
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-            white-space: nowrap;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            background-color: var(--tooltip-bg); /* Tooltip background color */
+            color: var(--tooltip-text); /* Tooltip text color */
+            padding: 12px 18px; /* Padding inside tooltip */
+            border-radius: 12px; /* Rounded corners */
+            font-size: 1em; /* Font size */
+            opacity: 0; /* Hidden by default */
+            transition: opacity 0.3s; /* Smooth transition on hover */
+            pointer-events: none; /* Prevents tooltip from capturing mouse events */
+            white-space: nowrap; /* Prevents text from wrapping */
+            z-index: 5; /* Ensures tooltip is above other elements */
         }
 
+        /* ====================================================
+           Tooltip Visibility on "No" Button Hover
+           Displays the tooltip when hovering over the button
+        ==================================================== */
         .btn-no:hover .tooltip {
-            opacity: 1;
+            opacity: 1; /* Makes tooltip visible */
         }
 
+        /* ====================================================
+           Adding Sparkle Emojis to Background Rain
+           Styles sparkles to have a different animation
+        ==================================================== */
+        .heart.sparkle {
+            animation-name: sparkleRainDown; /* Uses a different animation */
+        }
+
+        /* ====================================================
+           Sparkle Rain Down Animation
+           Similar to hearts but with sparkles
+        ==================================================== */
+        @keyframes sparkleRainDown {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Floating Hearts and Sparkles (Rain Effect) -->
-    <div class="hearts">
-        <!-- Hearts -->
-        <div class="heart">❤️</div>
-        <div class="heart">❤️</div>
-        <div class="heart">❤️</div>
-        <div class="heart">❤️</div>
-        <div class="heart">❤️</div>
-        <div class="heart">❤️</div>
-        <div class="heart">❤️</div>
-        <div class="heart">❤️</div>
-        <div class="heart">❤️</div>
-        <div class="heart">❤️</div>
-        <div class="heart">❤️</div>
-        <div class="heart">❤️</div>
-
-        <!-- Sparkles -->
-        <div class="sparkle-emoji">✨</div>
-        <div class="sparkle-emoji">✨</div>
-        <div class="sparkle-emoji">✨</div>
-        <div class="sparkle-emoji">✨</div>
-        <div class="sparkle-emoji">✨</div>
-        <div class="sparkle-emoji">✨</div>
-        <div class="sparkle-emoji">✨</div>
-        <div class="sparkle-emoji">✨</div>
-        <div class="sparkle-emoji">✨</div>
-        <div class="sparkle-emoji">✨</div>
-        <div class="sparkle-emoji">✨</div>
-        <div class="sparkle-emoji">✨</div>
+    <!-- ====================================================
+         Floating Hearts and Sparkles (Rain Effect)
+         Generates a magical background with hearts and sparkles
+    ==================================================== -->
+    <div class="hearts" id="heartsContainer">
+        <!-- Hearts and Sparkles will be generated via JavaScript -->
     </div>
 
-    <!-- Sparkles Container -->
-    <div class="sparkles">
-        <div class="sparkle"></div>
-        <div class="sparkle"></div>
-        <div class="sparkle"></div>
-        <div class="sparkle"></div>
-        <div class="sparkle"></div>
-        <div class="sparkle"></div>
-        <!-- Add more sparkles for a denser effect -->
-        <div class="sparkle"></div>
-        <div class="sparkle"></div>
-        <div class="sparkle"></div>
-        <div class="sparkle"></div>
-        <div class="sparkle"></div>
-        <div class="sparkle"></div>
-    </div>
-
-    <!-- Confetti Container -->
+    <!-- ====================================================
+         Confetti Container
+         Holds the confetti pieces for the fireworks effect
+    ==================================================== -->
     <div class="confetti" id="confettiContainer"></div>
 
+    <!-- ====================================================
+         Main Container
+         Holds the primary content: heading, photos, message, and buttons
+    ==================================================== -->
     <div class="container">
+        <!-- Main Question Heading -->
         <h1>Will You Be My Valentine?</h1>
         
+        <!-- Photos Section -->
         <div class="photos">
             <!-- Replace the src attribute with your own photo URLs -->
             <img src="https://via.placeholder.com/250" alt="Us Photo 1">
@@ -541,109 +503,234 @@
             <!-- Add more photos as desired -->
         </div>
         
+        <!-- Heartfelt Message -->
         <p class="message">
             From the moment we met, you've brought so much joy and love into my life. 
             Every day with you is a new adventure, and I can't imagine my life without you. 
             Will you be my Valentine?
         </p>
         
+        <!-- Buttons Section -->
         <div class="buttons">
-            <button id="yesButton" class="btn-yes">Yes!</button>
-            <button id="noButton" class="btn-no">
+            <!-- "Yes" Button -->
+            <button id="yesButton" class="btn-yes" aria-label="Yes, I will be your Valentine">Yes!</button>
+            <!-- "No" Button with Tooltip -->
+            <button id="noButton" class="btn-no" aria-label="No, I cannot be your Valentine">
                 No
                 <span class="tooltip">Are you kidding me? 😜</span>
             </button>
         </div>
     </div>
 
-    <!-- Modal for the Response -->
-    <div id="modal" class="modal">
+    <!-- ====================================================
+         Modal for the Response
+         Displays a confirmation message upon clicking "Yes"
+    ==================================================== -->
+    <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc">
         <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h2>Yay! ❤️</h2>
-            <p>I'm so happy you said yes! Looking forward to a wonderful Valentine's Day together.</p>
+            <!-- Close Button -->
+            <span class="close-button" aria-label="Close Modal">&times;</span>
+            <!-- Modal Heading -->
+            <h2 id="modalTitle">Yay! ❤️</h2>
+            <!-- Modal Description -->
+            <p id="modalDesc">I'm so happy you said yes! Looking forward to a wonderful Valentine's Day together.</p>
         </div>
     </div>
 
+    <!-- ====================================================
+         JavaScript for Interactivity
+         Handles dynamic generation of hearts/sparkles, button interactions, and animations
+    ==================================================== -->
     <script>
-        // JavaScript for Interactivity
+        // ====================================================
+        // Utility Functions
+        // ====================================================
 
-        // Get elements
+        /**
+         * Generates a random number within a specified range.
+         * @param {number} min - The minimum value.
+         * @param {number} max - The maximum value.
+         * @returns {number} - A random number between min and max.
+         */
+        function randomRange(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        /**
+         * Selects a random color from the predefined color palette.
+         * @returns {string} - A hex color code.
+         */
+        function getRandomColor() {
+            const colors = ['#ff6b81', '#d6a4e7', '#fbc2eb', '#a18cd1'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        // ====================================================
+        // Generate Floating Hearts and Sparkles
+        // ====================================================
+
+        const heartsContainer = document.getElementById('heartsContainer');
+        const heartCount = 40; // Adjust for desired density
+
+        for (let i = 0; i < heartCount; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            // Randomly decide if this is a heart or a sparkle
+            if (Math.random() < 0.3) { // 30% chance to be a sparkle
+                heart.classList.add('sparkle');
+                heart.textContent = '✨'; // Sparkle emoji
+            } else {
+                heart.textContent = '❤️'; // Heart emoji
+            }
+            // Random horizontal position
+            heart.style.left = `${randomRange(0, 100)}%`;
+            // Random font size for variety
+            heart.style.fontSize = `${randomRange(20, 40)}px`;
+            // Random animation duration for staggered movement
+            heart.style.animationDuration = `${randomRange(5, 10)}s`;
+            // Random animation delay to prevent synchronized movement
+            heart.style.animationDelay = `${randomRange(0, 5)}s`;
+            // Random opacity for depth effect
+            heart.style.opacity = randomRange(0.5, 1);
+            // Append to the hearts container
+            heartsContainer.appendChild(heart);
+        }
+
+        // ====================================================
+        // Get Essential Elements
+        // ====================================================
+
         const yesButton = document.getElementById('yesButton');
         const noButton = document.getElementById('noButton');
         const modal = document.getElementById('modal');
         const closeButton = document.querySelector('.close-button');
         const confettiContainer = document.getElementById('confettiContainer');
 
-        // Event listener for the Yes button
+        // ====================================================
+        // Event Listener for the "Yes" Button
+        // ====================================================
+
         yesButton.addEventListener('click', () => {
-            modal.style.display = 'block';
-            launchConfetti();
+            modal.style.display = 'block'; // Show the modal
+            launchConfetti(); // Trigger confetti animation
+            yesButton.setAttribute('disabled', 'disabled'); // Disable "Yes" button to prevent multiple clicks
+            noButton.setAttribute('disabled', 'disabled'); // Disable "No" button after "Yes" is clicked
         });
 
-        // Event listener for the Close button
+        // ====================================================
+        // Event Listener for the Close Button in Modal
+        // ====================================================
+
         closeButton.addEventListener('click', () => {
-            modal.style.display = 'none';
+            modal.style.display = 'none'; // Hide the modal
         });
 
-        // Close modal when clicking outside the modal content
+        // ====================================================
+        // Close Modal When Clicking Outside the Modal Content
+        // ====================================================
+
         window.addEventListener('click', (event) => {
             if (event.target == modal) {
-                modal.style.display = 'none';
+                modal.style.display = 'none'; // Hide the modal
             }
         });
 
-        // Function to Launch Confetti
+        // ====================================================
+        // Function to Launch Confetti Like Fireworks
+        // ====================================================
+
+        /**
+         * Launches confetti pieces to simulate fireworks.
+         */
         function launchConfetti() {
-            const confettiCount = 100; // Adjusted count for a fireworks-like effect
+            const confettiCount = 100; // Number of confetti pieces
             for (let i = 0; i < confettiCount; i++) {
                 createConfettiPiece();
             }
-
-            // Remove all confetti after 2 seconds
+            // Clear confetti after 3 seconds to prevent clutter
             setTimeout(() => {
                 confettiContainer.innerHTML = '';
-            }, 2000);
+            }, 3000);
         }
 
+        // ====================================================
         // Function to Create a Single Confetti Piece
+        // ====================================================
+
+        /**
+         * Creates and animates a single confetti piece.
+         */
         function createConfettiPiece() {
             const confetti = document.createElement('div');
             confetti.classList.add('confetti-piece');
-            // Random position across the width
-            confetti.style.left = Math.random() * 100 + 'vw';
-            // Random animation delay
-            confetti.style.animationDelay = Math.random() * 0.5 + 's';
-            // Random animation duration between 1s to 1.5s for fireworks effect
-            confetti.style.animationDuration = (Math.random() * 0.5 + 1) + 's';
-            // Random size between 5px to 10px
-            const size = Math.random() * 5 + 5;
-            confetti.style.width = size + 'px';
-            confetti.style.height = size + 'px';
-            // Random horizontal movement
-            const translateX = Math.random() * 200 - 100; // -100px to +100px
-            confetti.style.transform = `translateY(0px) translateX(0px)`;
-            confetti.style.transition = 'transform 1.5s ease-out';
+            // Random horizontal position
+            confetti.style.left = `${randomRange(0, 100)}vw`;
+            // Assign a random color from the palette
+            confetti.style.backgroundColor = getRandomColor();
+            // Random animation duration for varied movement
+            confetti.style.animationDuration = `${randomRange(1, 2)}s`;
+            // Random size between 5px to 15px for variety
+            const size = randomRange(5, 15);
+            confetti.style.width = `${size}px`;
+            confetti.style.height = `${size}px`;
+            // Random initial rotation angle
+            const angle = randomRange(0, 360);
+            // Apply initial transformation for spread effect
+            confetti.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+
+            // Append confetti to the container
             confettiContainer.appendChild(confetti);
 
-            // Trigger the animation
-            requestAnimationFrame(() => {
-                confetti.style.transform = `translateY(-100vh) translateX(${translateX}px) rotate(${Math.random() * 720}deg) scale(${Math.random() * 0.5 + 0.5})`;
-            });
-
-            // Remove the confetti piece after animation ends
-            confetti.addEventListener('transitionend', () => {
+            // Remove confetti piece after animation completes to maintain performance
+            confetti.addEventListener('animationend', () => {
                 confetti.remove();
             });
         }
 
+        // ====================================================
         // "No" Button Playfulness
+        // ====================================================
+
+        // Array of witty and funny messages for the "No" button tooltip
+        const wittyMessages = [
+            "Are you kidding me? 😜",
+            "Don't be shy! 😏",
+            "I knew you'd say yes! 😉",
+            "Nice try! 😄",
+            "You can't escape! 😆",
+            "Still thinking? 😅",
+            "Come on, say yes! 😇",
+            "No way! 😂",
+            "How about a yes? 😘",
+            "Trying to say no? 😝",
+            "Can't say no to you! 🥰",
+            "Seriously? 🤔",
+            "Better say yes! 💕",
+            "Yes is the way! 🎉",
+            "No can wait! 😎",
+            "Don't leave me hanging! 😢",
+            "Think positive! 🌟",
+            "You're too sweet! 🍬",
+            "What's stopping you? 🚀",
+            "Let's make it official! 📝"
+        ];
+
+        // Event listener for mouseover on the "No" button
         noButton.addEventListener('mouseover', () => {
-            moveButton(noButton);
-            displayWittyMessage(noButton);
+            moveButton(noButton); // Move the button to a new position
+            displayWittyMessage(noButton); // Display a witty message
         });
 
-        // Function to Move the "No" Button to a Random Position with Erratic Movement
+        // Event listener for focus on the "No" button (for keyboard navigation)
+        noButton.addEventListener('focus', () => {
+            moveButton(noButton); // Move the button to a new position
+            displayWittyMessage(noButton); // Display a witty message
+        });
+
+        /**
+         * Moves the "No" button to a random position within the container.
+         * @param {HTMLElement} button - The "No" button element.
+         */
         function moveButton(button) {
             const container = document.querySelector('.buttons');
             const containerRect = container.getBoundingClientRect();
@@ -653,37 +740,48 @@
             const maxX = containerRect.width - buttonRect.width;
             const maxY = containerRect.height - buttonRect.height;
 
-            // Generate random positions
-            const randX = Math.random() * maxX - maxX / 2; // Allow movement beyond container bounds for erratic effect
-            const randY = Math.random() * maxY - maxY / 2;
+            // Generate random positions with more variability for erratic movement
+            const randX = randomRange(-maxX / 2, maxX / 2); // Allows movement in both directions
+            const randY = randomRange(-maxY / 2, maxY / 2);
 
-            // Apply the random transform
+            // Apply the random transform to move the button
             button.style.transform = `translate(${randX}px, ${randY}px)`;
         }
 
-        // Function to Display Witty Messages
+        /**
+         * Displays a random witty message in the tooltip of the "No" button.
+         * @param {HTMLElement} button - The "No" button element.
+         */
         function displayWittyMessage(button) {
             const tooltip = button.querySelector('.tooltip');
-            const messages = [
-                "Are you kidding me? 😜",
-                "Don't be shy! 😏",
-                "I knew you'd say yes! 😉",
-                "Nice try! 😄",
-                "You can't escape! 😆",
-                "Still thinking? 😅",
-                "Come on, say yes! 😇",
-                "No way! 😂",
-                "How about a yes? 😘",
-                "Trying to say no? 😝"
-            ];
-            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-            tooltip.textContent = randomMessage;
+            const randomIndex = Math.floor(Math.random() * wittyMessages.length);
+            tooltip.textContent = wittyMessages[randomIndex];
         }
 
-        // Prevent clicking on "No" button
+        // ====================================================
+        // Prevent Clicking on the "No" Button
+        // ====================================================
+
+        /**
+         * Prevents any action when the "No" button is clicked.
+         * @param {Event} e - The click event.
+         */
         noButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            // Optionally, display a message or do nothing
+            e.preventDefault(); // Prevents the default button behavior
+            // Optionally, you can add additional feedback here
+        });
+
+        // ====================================================
+        // Accessibility: Allow Closing Modal with Escape Key
+        // ====================================================
+
+        /**
+         * Listens for the Escape key to close the modal if it's open.
+         */
+        window.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && modal.style.display === 'block') {
+                modal.style.display = 'none'; // Hide the modal
+            }
         });
     </script>
 </body>
